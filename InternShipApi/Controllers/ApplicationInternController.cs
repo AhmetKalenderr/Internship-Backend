@@ -1,5 +1,6 @@
 ﻿using InternShipApi.Core;
 using InternShipApi.DatabaseObject.Request;
+using InternShipApi.DatabaseObject.Response;
 using InternShipApi.Entities;
 using InternShipApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ namespace InternShipApi.Controllers
         public Task<Result<List<InternshipPosting>>> UserApp([FromBody]TokenDTO token)
         {
             return manager.GetUserApp(token);
+        }
+
+        [HttpPost("companyPost")]
+
+        public Task<Result<List<CompanyPostCount>>> CompanyPost([FromBody]TokenDTO token)
+        {
+            return manager.GetCompanyApp(token);
         }
     }
 }

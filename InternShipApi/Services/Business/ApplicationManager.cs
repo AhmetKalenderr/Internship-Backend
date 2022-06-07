@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InternShipApi.Core;
 using InternShipApi.DatabaseObject.Request;
+using InternShipApi.DatabaseObject.Response;
 using InternShipApi.Entities;
 using InternShipApi.Interfaces;
 using InternShipApi.Services.Utility;
@@ -49,7 +50,15 @@ namespace InternShipApi.Services.Business
           
         }
 
-      
+        public async Task<Result<List<CompanyPostCount>>> GetCompanyApp(TokenDTO token)
+        {
+            return new Result<List<CompanyPostCount>>
+            {
+                Data = await repo.GetCompanyPostCount(tokenUtility.getCompanyFromToken(token.Token).Id),
+                Message = "Başarılı",
+                Success = true
+            };
+        }
 
         public async Task<Result<List<InternshipPosting>>> GetUserApp(TokenDTO token)
         {

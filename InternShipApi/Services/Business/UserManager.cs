@@ -1,11 +1,13 @@
 ﻿using InternShipApi.Core;
 using InternShipApi.DatabaseObject;
 using InternShipApi.DatabaseObject.Request;
+using InternShipApi.DatabaseObject.Response;
 using InternShipApi.Entities;
 using InternShipApi.Interfaces;
 using InternShipApi.Models;
 using InternShipApi.Services.Utility;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace InternShipApi.Services.Business
@@ -82,6 +84,16 @@ namespace InternShipApi.Services.Business
                 Success = Success,
                 Message = Message,
                 Data = Data
+            };
+        }
+
+        public async Task<Result<List<UserFromApp>>> GetUsersFromApp(int id)
+        {
+            return new Result<List<UserFromApp>>
+            {
+                Data = await userRepository.GetUsers(id),
+                Message = "Başarılı",
+                Success = true
             };
         }
     }
