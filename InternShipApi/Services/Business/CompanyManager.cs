@@ -27,17 +27,16 @@ namespace InternShipApi.Services.Business
 
         public async Task<Result<string>> AddCompany(Company company)
         {
-            Console.WriteLine(company.Email);
 
             if (!RegexCheckUtility.IsValidEmail(company.Email)) 
             {
                 Message = "Email formatı geçersiz";
                 Success = false;
             }
-            else if(db.Companies.FirstOrDefault(c => c.Email == company.Email) != null)
-                {
-                    Message = "Zaten Kayıtlı bir Email Girdiniz";
-                    Success = false;
+            else if(db.Companies.Where(c => c.Email == company.Email).ToList().Count >= 1)
+            {
+                Message = "Zaten Kayıtlı bir Email Girdiniz";
+                Success = false;
                 }
             else if (!company.Email.EndsWith(company.WebSite))
             {
@@ -48,7 +47,6 @@ namespace InternShipApi.Services.Business
                 Message = "Kayıt Başarılı";
                 Success = true;
                 await _companyRepository.AddCompany(company);
-               
             }
 
             return new Result<string>

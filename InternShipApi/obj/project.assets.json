@@ -1280,11 +1280,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ahmet\\Desktop\\Bootcamp\\InternShipApi\\InternShipApi\\InternShipApi.csproj",
+      "projectUniqueName": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\InternShipApi.csproj",
       "projectName": "InternShipApi",
-      "projectPath": "C:\\Users\\Ahmet\\Desktop\\Bootcamp\\InternShipApi\\InternShipApi\\InternShipApi.csproj",
+      "projectPath": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\InternShipApi.csproj",
       "packagesPath": "C:\\Users\\Ahmet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ahmet\\Desktop\\Bootcamp\\InternShipApi\\InternShipApi\\obj\\",
+      "outputPath": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1362,7 +1362,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

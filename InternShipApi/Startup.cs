@@ -1,4 +1,6 @@
 using InternShipApi.Interfaces;
+using InternShipApi.Interfaces.IManager;
+using InternShipApi.Interfaces.IRepository;
 using InternShipApi.Models;
 using InternShipApi.Repository;
 using InternShipApi.Services.Business;
@@ -28,11 +30,15 @@ namespace InternShipApi
             services.AddDbContext<InternDatabaseContext>(db => db.UseNpgsql(connectionString));
 
             services.AddCors();
+
+
             services.AddControllers();
         
 
             services.AddTransient(typeof(ICompanyManager), typeof(CompanyManager));
             services.AddTransient(typeof(ICompanyRepository), typeof(CompanyRepository));
+            services.AddTransient(typeof(ICityManager), typeof(CityManager));
+            services.AddTransient(typeof(ICityRepository), typeof(CityRepository));
 
 
             services.AddAutoMapper(typeof(Startup));

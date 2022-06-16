@@ -25,7 +25,12 @@ namespace InternShipApi.Controllers
         [HttpPost("addUser")]
         public async Task<Result<string>> AddUser([FromBody] UserDTO userDto)
         {
-            return await userManager.AddUser(mapper.Map(userDto, new User()));
+            var c = userManager.AddUser(mapper.Map(userDto, new User()));
+            if (!c.Result.Success)
+            {
+                Response.StatusCode = 402;
+            }
+            return await c;
         }
 
         [HttpPost("loginUser")]

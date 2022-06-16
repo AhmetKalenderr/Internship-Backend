@@ -22,17 +22,11 @@ namespace InternShipApi.Controllers
         public async Task<Result<string>> AddCompnay([FromBody]CompanyDto companyDto)
         {
             var c = _companyManager.AddCompany(mapper.Map(companyDto, new Company()));
-            if (c.Result.Success)
-            {
-                return await _companyManager.AddCompany(mapper.Map(companyDto, new Company()));
-
-            }
-            else
+            if (!c.Result.Success)
             {
                 Response.StatusCode = 402;
-                return await _companyManager.AddCompany(mapper.Map(companyDto, new Company()));
-
             }
+            return await c;
         }
 
         [HttpPost("loginCompany")]
