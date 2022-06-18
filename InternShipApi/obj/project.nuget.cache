@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GxoEBbE4DWV7/q6GlghmqFSenAbfEj4u35lFzKargVIj80zlXtu1LMCaFpfmtKe48dluY62pGpQCGyyoz514hg==",
+  "dgSpecHash": "yVV8GCXeIxANsakFO85IZomOJeFjF15fZbWjnIKAr+Q3CaaP8W1q54dQm/0dOc4pUsRG/LQFsPPWT/+FUpyiNA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\InternShipApi.csproj",
+  "projectFilePath": "C:\\Users\\Ahmet\\Desktop\\Bootcamp\\InternShipApi\\InternShipApi\\InternShipApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmet\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Ahmet\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

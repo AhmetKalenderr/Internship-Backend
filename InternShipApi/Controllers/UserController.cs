@@ -49,7 +49,7 @@ namespace InternShipApi.Controllers
             }
         }
 
-        [HttpPost("getusersfromapp")]
+        [HttpGet("getusersfromapp")]
 
         public async Task<Result<List<UserFromApp>>> GetUserFromApp(int id)
         {
