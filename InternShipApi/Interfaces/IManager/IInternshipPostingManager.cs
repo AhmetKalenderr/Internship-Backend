@@ -16,5 +16,6 @@ namespace InternShipApi.Interfaces
         Task<Result<List<InternshipPosting>>> GetByCityId(int id);
         Task<Result<List<InternshipPosting>>> GetAllPosting();
 
+        Task<Result<List<InternshipPosting>>> GetByFilter(FilterBody filter);
     }
 }
