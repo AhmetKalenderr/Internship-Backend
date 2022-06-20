@@ -40,6 +40,8 @@ namespace InternShipApi
             services.AddTransient(typeof(ICityManager), typeof(CityManager));
             services.AddTransient(typeof(ICityRepository), typeof(CityRepository));
 
+            services.AddTransient(typeof(ISchoolManager), typeof(SchoolManager));
+            services.AddTransient(typeof(ISchoolRepository), typeof(SchoolRepository));
 
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));

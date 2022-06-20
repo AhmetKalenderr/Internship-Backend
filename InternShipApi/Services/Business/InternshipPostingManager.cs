@@ -82,5 +82,44 @@ namespace InternShipApi.Services.Business
                 Success = true
             };
         }
+
+        public async Task<Result<List<InternshipPosting>>> GetByFilter(FilterBody filter)
+        {
+            if (filter.CityId != 0 && filter.PositionId != 0)
+            {
+                return new Result<List<InternshipPosting>>
+                {
+                    Data = await repo.GetByFilter(filter),
+                    Message = "Data Getirildi",
+                    Success = true
+                };
+            }else if(filter.CityId != 0)
+            {
+                return new Result<List<InternshipPosting>>
+                {
+                    Data = await repo.GetByCityId(filter.CityId),
+                    Message = $"{filter.CityId} City idli İlanlar getirildi",
+                    Success = true
+                };
+            }else if(filter.PositionId != 0)
+            {
+                return new Result<List<InternshipPosting>>
+                {
+                    Data = await repo.GetById(filter.PositionId),
+                    Message = $"{filter.PositionId} Pozisyon idli İlanlar getirildi",
+                    Success = true
+                };
+            }else
+            {
+                return new Result<List<InternshipPosting>>
+                {
+                    Data = await repo.GetAll(),
+                    Message = "Data getirildi",
+                    Success = true
+                };
+            }
+
+            
+        }
     }
 }

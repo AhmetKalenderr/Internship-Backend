@@ -1,4 +1,5 @@
 ﻿using InternShipApi.DatabaseObject;
+using InternShipApi.DatabaseObject.Request;
 using InternShipApi.Entities;
 using InternShipApi.Interfaces;
 using InternShipApi.Models;
@@ -41,6 +42,11 @@ namespace InternShipApi.Repository
         public  async Task<List<InternshipPosting>> GetById(int id)
         {
             return await db.InternshipPostings.Where(i => i.positionId == id).Include(c=> c.position).Include(c=> c.city).Include(c=>c.company).ToListAsync();
+        }
+
+        public async Task<List<InternshipPosting>> GetByFilter(FilterBody filter)
+        {
+            return await db.InternshipPostings.Where(i => i.CityId == filter.CityId).Where(i=> i.positionId == filter.PositionId).Include(c => c.position).Include(c => c.city).Include(c => c.company).ToListAsync();
         }
     }
 }

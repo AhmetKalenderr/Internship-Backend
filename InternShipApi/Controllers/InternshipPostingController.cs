@@ -52,5 +52,12 @@ namespace InternShipApi.Controllers
         {
             return await manager.GetAllPosting();
         }
+
+        [HttpPost("getbyfilter")]
+
+        public async Task<Result<List<InternshipPosting>>> GetByFilter([FromBody]FilterBody filter)
+        {
+            return await manager.GetByFilter(filter);
+        }
     }
 }
