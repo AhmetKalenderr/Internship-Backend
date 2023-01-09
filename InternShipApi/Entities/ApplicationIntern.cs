@@ -12,7 +12,7 @@ namespace InternShipApi.Entities
 
         public int UserId { get; set; }
 
-        public InternshipPosting post { get; set; }
+        // public InternshipPosting post { get; set; }
 
         public int PostId { get; set; }
 

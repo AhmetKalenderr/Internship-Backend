@@ -9,10 +9,10 @@ namespace InternShipApi.Interfaces
     {
         Task AddApplication(ApplicationIntern app);
 
-        Task<List<InternshipPosting>> GetUserApp(int id);
+        // Task<List<InternshipPosting>> GetUserApp(int id);
 
         bool CheckIfUserApp(ApplicationIntern app);
 
-        Task<List<CompanyPostCount>> GetCompanyPostCount(int id);
+        // Task<List<CompanyPostCount>> GetCompanyPostCount(int id);
     }
 }

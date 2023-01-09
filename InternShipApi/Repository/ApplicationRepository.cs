@@ -33,19 +33,19 @@ namespace InternShipApi.Repository
         
 
 
-        public async Task<List<InternshipPosting>> GetUserApp(int id)
-        {
-           List<ApplicationIntern> apps =  db.ApplicationIntern.Where(i => i.UserId == id).ToList();
-           List<InternshipPosting> postList = new();
+        //public async Task<List<InternshipPosting>> GetUserApp(int id)
+        //{
+        //   List<ApplicationIntern> apps =  db.ApplicationIntern.Where(i => i.UserId == id).ToList();
+        //   List<InternshipPosting> postList = new();
 
-            foreach (var app in apps)
-            {
-                postList.Add( await db.InternshipPostings.Include(i => i.city).Include(i => i.position).Include(i => i.company).FirstOrDefaultAsync(i => i.Id == app.PostId));
-            }
-            Console.WriteLine(postList.Count);
-            return postList;
+        //    foreach (var app in apps)
+        //    {
+        //        postList.Add( await db.InternshipPostings.Include(i => i.city).Include(i => i.position).Include(i => i.company).FirstOrDefaultAsync(i => i.Id == app.PostId));
+        //    }
+        //    Console.WriteLine(postList.Count);
+        //    return postList;
         
-        }
+        //}
 
         public bool CheckIfUserApp(ApplicationIntern app)
         {
@@ -62,19 +62,19 @@ namespace InternShipApi.Repository
             return check;
         }
 
-        public async Task<List<CompanyPostCount>> GetCompanyPostCount(int id)
-        {
-            List<InternshipPosting> posts = await db.InternshipPostings.Where(i => i.companyId == id).ToListAsync();
+        //public async Task<List<CompanyPostCount>> GetCompanyPostCount(int id)
+        //{
+        //    List<InternshipPosting> posts = await db.InternshipPostings.Where(i => i.companyId == id).ToListAsync();
 
-            List<CompanyPostCount> companyPost = new List<CompanyPostCount>();
+        //    List<CompanyPostCount> companyPost = new List<CompanyPostCount>();
 
-            foreach (var post in posts)
-            {
-                companyPost.Add(new CompanyPostCount { Count = Convert.ToInt32(db.ApplicationIntern.Where(i => i.PostId == post.Id).ToList().Count), post= db.InternshipPostings.Include(i => i.position).Include(i => i.company).Include(i => i.city).FirstOrDefaultAsync(p => p.Id == post.Id).Result });
-            }
+        //    foreach (var post in posts)
+        //    {
+        //        companyPost.Add(new CompanyPostCount { Count = Convert.ToInt32(db.ApplicationIntern.Where(i => i.PostId == post.Id).ToList().Count), post= db.InternshipPostings.Include(i => i.position).Include(i => i.company).Include(i => i.city).FirstOrDefaultAsync(p => p.Id == post.Id).Result });
+        //    }
 
-            return companyPost;
+        //    return companyPost;
 
-        }
+        //}
     }
 }

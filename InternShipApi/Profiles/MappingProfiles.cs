@@ -16,9 +16,9 @@ namespace InternShipApi.Profiles
             CreateMap<ApplicationDTO, ApplicationIntern>();
             CreateMap<AddInternshipPositionDto, InternshipPosition>();
             CreateMap<CompanyDto, Company>();
-            CreateMap<AddInternshipPostingDto, InternshipPosting>()
-                .ForMember(i => i.PostEndTime, a => a.MapFrom(s => DateTime.Now.AddDays(s.PostExpireDay)))
-                ;
+            //CreateMap<AddInternshipPostingDto, InternshipPosting>()
+            //    .ForMember(i => i.PostEndTime, a => a.MapFrom(s => DateTime.Now.AddDays(s.PostExpireDay)))
+            //    ;
             
         }
     }

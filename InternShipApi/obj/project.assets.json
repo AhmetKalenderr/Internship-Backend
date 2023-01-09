@@ -1275,19 +1275,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ahmet\\.nuget\\packages\\": {}
+    "C:\\Users\\Metehan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\InternShipApi.csproj",
-      "projectName": "InternShipApi",
-      "projectPath": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\InternShipApi.csproj",
-      "packagesPath": "C:\\Users\\Ahmet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ahmet\\OneDrive\\Masaüstü\\Staj ve Stajyer bulma Uygulaması\\Internship-Backend\\InternShipApi\\obj\\",
+      "projectUniqueName": "C:\\Appointment\\Internship-Backend\\InternShipApi\\Appointment.csproj",
+      "projectName": "Appointment",
+      "projectPath": "C:\\Appointment\\Internship-Backend\\InternShipApi\\Appointment.csproj",
+      "packagesPath": "C:\\Users\\Metehan\\.nuget\\packages\\",
+      "outputPath": "C:\\Appointment\\Internship-Backend\\InternShipApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Metehan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1362,7 +1362,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace InternShipApi.Migrations
+namespace Appointment.Migrations
 {
     [DbContext(typeof(InternDatabaseContext))]
     partial class InternDatabaseContextModelSnapshot : ModelSnapshot
@@ -18,6 +18,29 @@ namespace InternShipApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Appointment.Entities.MailVerify", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MailAddress")
+                        .HasColumnType("text");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("MailVerifies");
+                });
 
             modelBuilder.Entity("InternShipApi.Entities.ApplicationIntern", b =>
                 {
@@ -36,8 +59,6 @@ namespace InternShipApi.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -106,45 +127,6 @@ namespace InternShipApi.Migrations
                     b.ToTable("InternshipPositions");
                 });
 
-            modelBuilder.Entity("InternShipApi.Entities.InternshipPosting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("PostEndTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("PostStartTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("companyId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("positionId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("companyId");
-
-                    b.HasIndex("positionId");
-
-                    b.ToTable("InternshipPostings");
-                });
-
             modelBuilder.Entity("InternShipApi.Entities.School", b =>
                 {
                     b.Property<int>("Id")
@@ -167,9 +149,6 @@ namespace InternShipApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("BornYear")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
@@ -179,34 +158,60 @@ namespace InternShipApi.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("integer");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
                         .HasColumnType("text");
 
+                    b.Property<int>("cityId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("userTypeId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SchoolId");
+                    b.HasIndex("cityId");
+
+                    b.HasIndex("userTypeId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InternShipApi.Entities.ApplicationIntern", b =>
+            modelBuilder.Entity("InternShipApi.Entities.UserType", b =>
                 {
-                    b.HasOne("InternShipApi.Entities.InternshipPosting", "post")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserTypes");
+                });
+
+            modelBuilder.Entity("Appointment.Entities.MailVerify", b =>
+                {
+                    b.HasOne("InternShipApi.Entities.User", "user")
                         .WithMany()
-                        .HasForeignKey("PostId")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("InternShipApi.Entities.ApplicationIntern", b =>
+                {
                     b.HasOne("InternShipApi.Entities.User", "user")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("post");
 
                     b.Navigation("user");
                 });
@@ -222,42 +227,23 @@ namespace InternShipApi.Migrations
                     b.Navigation("city");
                 });
 
-            modelBuilder.Entity("InternShipApi.Entities.InternshipPosting", b =>
+            modelBuilder.Entity("InternShipApi.Entities.User", b =>
                 {
                     b.HasOne("InternShipApi.Entities.City", "city")
                         .WithMany()
-                        .HasForeignKey("CityId")
+                        .HasForeignKey("cityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InternShipApi.Entities.Company", "company")
+                    b.HasOne("InternShipApi.Entities.UserType", "userType")
                         .WithMany()
-                        .HasForeignKey("companyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InternShipApi.Entities.InternshipPosition", "position")
-                        .WithMany()
-                        .HasForeignKey("positionId")
+                        .HasForeignKey("userTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("city");
 
-                    b.Navigation("company");
-
-                    b.Navigation("position");
-                });
-
-            modelBuilder.Entity("InternShipApi.Entities.User", b =>
-                {
-                    b.HasOne("InternShipApi.Entities.School", "school")
-                        .WithMany()
-                        .HasForeignKey("SchoolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("school");
+                    b.Navigation("userType");
                 });
 #pragma warning restore 612, 618
         }

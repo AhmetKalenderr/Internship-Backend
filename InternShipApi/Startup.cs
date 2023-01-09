@@ -1,3 +1,7 @@
+using Appointment.Interfaces.IManager;
+using Appointment.Interfaces.IRepository;
+using Appointment.Repository;
+using Appointment.Services.Business;
 using InternShipApi.Interfaces;
 using InternShipApi.Interfaces.IManager;
 using InternShipApi.Interfaces.IRepository;
@@ -47,12 +51,14 @@ namespace InternShipApi
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
             services.AddTransient(typeof(IUserManager), typeof(UserManager));
            
-            services.AddTransient(typeof(IInternshipPostingManager), typeof(InternshipPostingManager));
-            services.AddTransient(typeof(IInternshipPostingRepository), typeof(InternshipPostingRepository));
+            //services.AddTransient(typeof(IInternshipPostingManager), typeof(InternshipPostingManager));
+            // services.AddTransient(typeof(IInternshipPostingRepository), typeof(InternshipPostingRepository));
             services.AddTransient(typeof(IInternshipPositionManager), typeof(InternshipPositionManager));
             services.AddTransient(typeof(IInternshipPositionRepository), typeof(InternshipPositionRepository));
             services.AddTransient(typeof(IApplicationManager), typeof(ApplicationManager));
             services.AddTransient(typeof(IApplicationRepository), typeof(ApplicationRepository));
+            services.AddTransient(typeof(IMailVerifiedManager), typeof(MailVerifiedManager));
+            services.AddTransient(typeof(IMailVerifiedRepository), typeof(MailVerifiedRepository));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternShipApi", Version = "v1" });

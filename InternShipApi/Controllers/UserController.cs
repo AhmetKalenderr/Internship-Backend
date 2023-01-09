@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Appointment.Interfaces.IManager;
+using Appointment.Services.Utility;
+using AutoMapper;
 using InternShipApi.Core;
 using InternShipApi.DatabaseObject.Request;
 using InternShipApi.DatabaseObject.Response;
@@ -14,10 +16,12 @@ namespace InternShipApi.Controllers
     [Route("/api/[controller]")]
     public class UserController : Controller
     {
+        private readonly IMailVerifiedManager manager;
         private readonly IMapper mapper;
         private readonly IUserManager userManager;
-        public UserController(IMapper mapper, IUserManager userManager)
+        public UserController(IMapper mapper, IUserManager userManager, IMailVerifiedManager _manager)
         {
+            this.manager = _manager;
             this.userManager = userManager;
             this.mapper = mapper;
         }
@@ -30,6 +34,10 @@ namespace InternShipApi.Controllers
             {
                 Response.StatusCode = 402;
             }
+            else if (c.Result.Success)
+            {
+                c.Result.Message = manager.SetEmailVerified(userDto.Email);
+            }
             return await c;
         }
 
@@ -37,10 +45,11 @@ namespace InternShipApi.Controllers
         public async Task<Result<string>> LoginUser([FromBody] LoginUser user)
         {
 
+
             if (userManager.LoginUser(user).Result.Success)
             {
-                return await userManager.LoginUser(user);
 
+                return await userManager.LoginUser(user);
             }
             else
             {
@@ -49,6 +58,7 @@ namespace InternShipApi.Controllers
             }
         }
 
+
         [HttpGet("getusersfromapp")]
 
         public async Task<Result<List<UserFromApp>>> GetUserFromApp(int id)
@@ -56,8 +66,8 @@ namespace InternShipApi.Controllers
             return await userManager.GetUsersFromApp(id);
         }
 
-        
 
-    
+
+
     }
 }

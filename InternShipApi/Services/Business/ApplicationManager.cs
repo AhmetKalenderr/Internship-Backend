@@ -50,24 +50,24 @@ namespace InternShipApi.Services.Business
           
         }
 
-        public async Task<Result<List<CompanyPostCount>>> GetCompanyApp(TokenDTO token)
-        {
-            return new Result<List<CompanyPostCount>>
-            {
-                Data = await repo.GetCompanyPostCount(tokenUtility.getCompanyFromToken(token.Token).Id),
-                Message = "Başarılı",
-                Success = true
-            };
-        }
+        //public async Task<Result<List<CompanyPostCount>>> GetCompanyApp(TokenDTO token)
+        //{
+        //    return new Result<List<CompanyPostCount>>
+        //    {
+        //        Data = await repo.GetCompanyPostCount(tokenUtility.getCompanyFromToken(token.Token).Id),
+        //        Message = "Başarılı",
+        //        Success = true
+        //    };
+        // }
 
-        public async Task<Result<List<InternshipPosting>>> GetUserApp(TokenDTO token)
-        {
-            return new Result<List<InternshipPosting>>
-            {
-                Success = true,
-                Data = await repo.GetUserApp(tokenUtility.getUserFromToken(token.Token).Id),
-                Message = "Başarılı"
-            };
-        }
+        //public async Task<Result<List<InternshipPosting>>> GetUserApp(TokenDTO token)
+        //{
+        //    return new Result<List<InternshipPosting>>
+        //    {
+        //        Success = true,
+        //        Data = await repo.GetUserApp(tokenUtility.getUserFromToken(token.Token).Id),
+        //        Message = "Başarılı"
+        //    };
+        //}
     }
 }

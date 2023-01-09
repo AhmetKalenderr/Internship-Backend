@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace InternShipApi.Migrations
+namespace Appointment.Migrations
 {
-    public partial class internship : Migration
+    public partial class Appointment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,19 @@ namespace InternShipApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Companies",
                 columns: table => new
                 {
@@ -78,56 +91,26 @@ namespace InternShipApi.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    SchoolId = table.Column<int>(type: "integer", nullable: false),
                     Surname = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
-                    BornYear = table.Column<int>(type: "integer", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    cityId = table.Column<int>(type: "integer", nullable: false),
+                    userTypeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Schools_SchoolId",
-                        column: x => x.SchoolId,
-                        principalTable: "Schools",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InternshipPostings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    positionId = table.Column<int>(type: "integer", nullable: false),
-                    CityId = table.Column<int>(type: "integer", nullable: false),
-                    PostStartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    PostEndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
-                    companyId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InternshipPostings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InternshipPostings_Cities_CityId",
-                        column: x => x.CityId,
+                        name: "FK_Users_Cities_cityId",
+                        column: x => x.cityId,
                         principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InternshipPostings_Companies_companyId",
-                        column: x => x.companyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InternshipPostings_InternshipPositions_positionId",
-                        column: x => x.positionId,
-                        principalTable: "InternshipPositions",
+                        name: "FK_Users_UserTypes_userTypeId",
+                        column: x => x.userTypeId,
+                        principalTable: "UserTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -146,12 +129,6 @@ namespace InternShipApi.Migrations
                 {
                     table.PrimaryKey("PK_ApplicationIntern", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApplicationIntern_InternshipPostings_PostId",
-                        column: x => x.PostId,
-                        principalTable: "InternshipPostings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_ApplicationIntern_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
@@ -159,10 +136,26 @@ namespace InternShipApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ApplicationIntern_PostId",
-                table: "ApplicationIntern",
-                column: "PostId");
+            migrationBuilder.CreateTable(
+                name: "MailVerifies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    userId = table.Column<int>(type: "integer", nullable: false),
+                    MailAddress = table.Column<string>(type: "text", nullable: true),
+                    IsVerified = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MailVerifies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MailVerifies_Users_userId",
+                        column: x => x.userId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationIntern_UserId",
@@ -175,24 +168,19 @@ namespace InternShipApi.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternshipPostings_CityId",
-                table: "InternshipPostings",
-                column: "CityId");
+                name: "IX_MailVerifies_userId",
+                table: "MailVerifies",
+                column: "userId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InternshipPostings_companyId",
-                table: "InternshipPostings",
-                column: "companyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InternshipPostings_positionId",
-                table: "InternshipPostings",
-                column: "positionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_SchoolId",
+                name: "IX_Users_cityId",
                 table: "Users",
-                column: "SchoolId");
+                column: "cityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_userTypeId",
+                table: "Users",
+                column: "userTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -201,22 +189,25 @@ namespace InternShipApi.Migrations
                 name: "ApplicationIntern");
 
             migrationBuilder.DropTable(
-                name: "InternshipPostings");
-
-            migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "InternshipPositions");
 
             migrationBuilder.DropTable(
+                name: "MailVerifies");
+
+            migrationBuilder.DropTable(
                 name: "Schools");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "UserTypes");
         }
     }
 }

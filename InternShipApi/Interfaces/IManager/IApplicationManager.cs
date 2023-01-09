@@ -11,9 +11,9 @@ namespace InternShipApi.Interfaces
     {
         Task<Result<string>> AddApplication(ApplicationDTO app);
 
-        Task<Result<List<InternshipPosting>>> GetUserApp(TokenDTO token);
+        // Task<Result<List<InternshipPosting>>> GetUserApp(TokenDTO token);
 
-        Task<Result<List<CompanyPostCount>>> GetCompanyApp(TokenDTO token);
+        // Task<Result<List<CompanyPostCount>>> GetCompanyApp(TokenDTO token);
 
 
     }

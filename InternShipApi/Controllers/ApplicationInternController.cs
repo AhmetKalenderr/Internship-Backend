@@ -23,17 +23,18 @@ namespace InternShipApi.Controllers
             return manager.AddApplication(app);
         }
 
-        [HttpPost("userApp")]
-        public Task<Result<List<InternshipPosting>>> UserApp([FromBody]TokenDTO token)
-        {
-            return manager.GetUserApp(token);
-        }
 
-        [HttpPost("companyPost")]
+        //[HttpPost("userApp")]
+        //public Task<Result<List<InternshipPosting>>> UserApp([FromBody] TokenDTO token)
+        //{
+        //    return manager.GetUserApp(token);
+        //}
 
-        public Task<Result<List<CompanyPostCount>>> CompanyPost([FromBody]TokenDTO token)
-        {
-            return manager.GetCompanyApp(token);
-        }
+        //[HttpPost("companyPost")]
+
+        //public Task<Result<List<CompanyPostCount>>> CompanyPost([FromBody]TokenDTO token)
+        //{
+        //    return manager.GetCompanyApp(token);
+        //}
     }
 }

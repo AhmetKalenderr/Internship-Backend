@@ -33,7 +33,9 @@ namespace InternShipApi.Repository
             foreach (var app in apps)
             {
                 User user = await _databaseContext.Users.FindAsync(app.UserId);
-                users.Add(new UserFromApp { AppTime =  app.AppTime.ToString(), BornYear = user.BornYear, Email = user.Email, Name = user.Name, school = _databaseContext.Schools.Find(user.SchoolId), Surname = user.Surname });
+                users.Add(new UserFromApp { AppTime =  app.AppTime.ToString(),  Email = user.Email, Name = user.Name,
+                    //school = _databaseContext.Schools.Find(user.SchoolId),
+                    Surname = user.Surname });
             }
 
             return users;
